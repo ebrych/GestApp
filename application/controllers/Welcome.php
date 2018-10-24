@@ -24,20 +24,32 @@ class Welcome extends CI_Controller {
 			redirect(base_url().'Welcome/panel');
 		}
 	}
+	
+	public function logout(){
+		$this->load->helper('url');
+		$this->load->model('DataModel');
+		$idUsr=$this->session->userdata('id');
+		$token=$this->session->userdata('token');
+		$this->DataModel->logout($idUsr,$token);
+		$this->session->sess_destroy();
+		redirect('http://'.base_url().'login');
+	}
 
 	public function panel(){
 		$this->load->helper('url');
 		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		if($session==true){
-			
+			$cargo=$this->session->userdata('cargo');
+			$data['MyNombre']=$this->session->userdata('username');
+			$data['Permisos']=$this->DataBaseModel->obtenerPermisos($cargo);
+			$this->load->view('Layouts/header');
+			$this->load->view('Layouts/menu');
+			$this->load->view('panel');
+			$this->load->view('Layouts/footer');	
 		}else{
 			redirect('http://'.base_url().'login');
 		}
-		
-		$this->load->view('Layouts/header');
-		$this->load->view('panel');
-		$this->load->view('Layouts/footer');
 	}
 
 }
