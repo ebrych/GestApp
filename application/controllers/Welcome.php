@@ -16,17 +16,25 @@ class Welcome extends CI_Controller {
 		$this->load->model('DataModel');
 		$user = $this->input->post('username');
 		$pass= $this->input->post('password');
-		$dtosSess=$this->DataModel->login($user,$pass);
+		$dtosSess=$this->DataModel->session($user,$pass);
 		if($dtosSess==null){
-			redirect(base_url().'admin/');
+			redirect(base_url());
 		}else{
 			$this->session->set_userdata($dtosSess);
-			redirect(base_url().'panel');
+			redirect(base_url().'Welcome/panel');
 		}
 	}
 
 	public function panel(){
 		$this->load->helper('url');
+		$this->load->model('DataModel');
+		$session=$this->session->userdata('logged');
+		if($session==true){
+			
+		}else{
+			redirect('http://'.base_url().'login');
+		}
+		
 		$this->load->view('Layouts/header');
 		$this->load->view('panel');
 		$this->load->view('Layouts/footer');
