@@ -41,11 +41,11 @@ class Welcome extends CI_Controller {
 		$session=$this->session->userdata('logged');
 		if($session==true){
 			$cargo=$this->session->userdata('cargo');
-			$data['MyNombre']=$this->session->userdata('username');
+			$info['MyNombre']=$this->session->userdata('username');
 			$data['Permisos']=$this->DataBaseModel->obtenerPermisos($cargo);
 			$this->load->view('Layouts/header');
-			$this->load->view('Layouts/menu');
-			$this->load->view('panel');
+			$this->load->view('Layouts/menu',$info);
+			$this->load->view('panel',$data);
 			$this->load->view('Layouts/footer');	
 		}else{
 			redirect('http://'.base_url().'login');
