@@ -32,7 +32,7 @@ class Welcome extends CI_Controller {
 		$token=$this->session->userdata('token');
 		$this->DataModel->logout($idUsr,$token);
 		$this->session->sess_destroy();
-		redirect('http://'.base_url().'login');
+		redirect('http://'.base_url());
 	}
 
 	public function panel(){
