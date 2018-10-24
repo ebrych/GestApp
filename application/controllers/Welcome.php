@@ -48,7 +48,7 @@ class Welcome extends CI_Controller {
 			$this->load->view('panel',$data);
 			$this->load->view('Layouts/footer');	
 		}else{
-			redirect('http://'.base_url().'login');
+			redirect('http://'.base_url());
 		}
 	}
 
