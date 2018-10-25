@@ -126,6 +126,44 @@ class DataModel extends CI_Model
         return $this->db->update('TB_LOCALES',$datos);
     }
     
+    //insumos
+    public function insumoGroupList(){
+        $query = $this->db->query("SELECT id,nombre,descripcion, (CASE WHEN estado = 1 THEN 'Activo' ELSE 'Inactivo'END) AS 'estado' FROM TB_INSUMOS");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function insumoSelectList(){
+        $query = $this->db->query("SELECT id,nombre,descripcion FROM TB_INSUMOS WHERE estado='1' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function insertaInsumo($datos){
+        $query = $this->db->insert('TB_INSUMOS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaInsumo($id){
+        $query = $this->db->query("SELECT id,nombre,descripcion,estado as 'idEstado',(CASE WHEN estado = 1 THEN 'Activo' ELSE 'Inactivo'END) AS 'estado' FROM TB_INSUMOS WHERE id='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function actualizaInsumo($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_INSUMOS',$datos);
+    }
     
 
 
