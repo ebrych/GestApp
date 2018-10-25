@@ -202,6 +202,84 @@ class DataModel extends CI_Model
         $query = $this->db->query("DELETE FROM TB_CARGO_PERMISO WHERE idCargo='$idCargo' AND idPermiso='$idPermiso' ");
         return $query;
     }
+    
+    //Personal
+    public function listaPersonal(){
+        $query = $this->db->query("SELECT u.id,u.nombres,c.descripcion as 'cargo',l.nombres 
+                                    as 'local',u.email,u.telefono,(CASE WHEN u.estado = 1 
+                                                                    THEN 'Activo' ELSE 'Inactivo'END) AS 'estado' 
+                                    FROM TB_USUARIOS u 
+                                    INNER JOIN TB_CARGOS c on u.idCargo=c.id 
+                                    INNER JOIN TB_LOCALES l on u.idLocal=l.id
+                                    WHERE u.id > 1");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function agregarUsuario($datos){
+        $query = $this->db->insert('TB_USUARIOS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function listaPersonalByLocal($local){
+        $query = $this->db->query("SELECT u.id,u.nombres,c.descripcion as 'cargo'
+                                    FROM TB_USUARIOS u 
+                                    INNER JOIN TB_CARGOS c on u.idCargo=c.id 
+                                    INNER JOIN TB_LOCALES l on u.idLocal=l.id
+                                    WHERE u.idLocal='$local' AND u.id > 1");
+        $result =[];
+        $hoy=date("Y-m-d");
+        foreach ($query->result() as $row){
+            $datos = array(
+                'id' => $row->id,
+                'nombres'  => $row->nombres,
+                'cargo' => $row->cargo,
+                'reporte'=>$this->minRepoAsistencia($row->id,$hoy)
+            );
+            array_push($result,$datos);
+        return $result;
+        }
+    }
+    public function minRepoAsistencia($id,$date){
+        $respuesta="";
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_ASISTENCIAS WHERE idUsuario='$id' AND fecha='$date' ");
+        $rslt = $query->result();
+        if($rslt[0]->result==0){
+            $respuesta="Inasistencia";
+        }else{
+            $respuesta="Asistencia";
+        }
+        return $respuesta;
+    }
+    public function listaUsuarioById($id){
+        $query = $this->db->query("SELECT u.id,u.nombres,u.idCargo,c.descripcion,u.idLocal,l.nombres as 'local',
+                                          u.email,u.telefono,u.estado as 'idEstado',
+                                          (CASE WHEN u.estado = 1 THEN 'Activo' ELSE'Inactivo'END) AS 'estado' 
+                                    FROM TB_USUARIOS u 
+                                    INNER JOIN TB_CARGOS c on u.idCargo=c.id 
+                                    INNER JOIN TB_LOCALES l on u.idLocal=l.id
+                                    WHERE u.id='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function buscaUsuario($mail){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_USUARIOS WHERE email='$mail' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
+    public function actualizaUsuario($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_USUARIOS',$datos);
+    }
 
 
 }
