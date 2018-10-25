@@ -86,6 +86,47 @@ class DataModel extends CI_Model
         return $this->db->update('TB_CARGOS',$datos);
     }
     
+    
+    //locales
+    public function LocalGroupList(){
+        $query = $this->db->query("SELECT id,nombres,direccion,telefono, (CASE WHEN estado = 1 THEN 'Activo' ELSE 'Inactivo'END) AS 'estado' FROM TB_LOCALES");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function LocalSelectList(){
+        $query = $this->db->query("SELECT id,nombres,direccion,telefono FROM TB_LOCALES WHERE estado='1' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function insertaLocal($datos){
+        $query = $this->db->insert('TB_LOCALES',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaLoca($id){
+        $query = $this->db->query("SELECT id,nombres,direccion,telefono,estado as 'idEstado',(CASE WHEN estado = 1 THEN 'Activo' ELSE 'Inactivo'END) AS 'estado' FROM TB_LOCALES WHERE id='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+    public function actualizaLocal($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_LOCALES',$datos);
+    }
+    
+    
 
 
 }
