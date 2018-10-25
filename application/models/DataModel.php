@@ -165,6 +165,43 @@ class DataModel extends CI_Model
         return $this->db->update('TB_INSUMOS',$datos);
     }
     
+    //Permisos
+    public function listarPermisos(){
+        $query = $this->db->query("SELECT id,descripcion FROM TB_PERMISOS");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    
+    public function listaPermisosById($id){
+        $query = $this->db->query("SELECT p.id,p.descripcion FROM TB_CARGO_PERMISO cp INNER JOIN TB_PERMISOS p on cp.idPermiso=p.id WHERE cp.idCargo='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function insertaPermiso($datos){
+        $query = $this->db->insert('TB_CARGO_PERMISO',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaPermiso($idCargo,$idPermiso){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_CARGO_PERMISO WHERE idCargo='$idCargo' AND idPermiso='$idPermiso' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+        
+    }
+    public function eliminaPermiso($idCargo,$idPermiso){
+        $query = $this->db->query("DELETE FROM TB_CARGO_PERMISO WHERE idCargo='$idCargo' AND idPermiso='$idPermiso' ");
+        return $query;
+    }
 
 
 }
