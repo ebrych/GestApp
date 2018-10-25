@@ -36,7 +36,7 @@ class Cargos extends CI_Controller {
             $info['MyNombre']=$this->session->userdata('username');
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu',$info);
-            $this->load->view('Cargos/index');
+            $this->load->view('Cargos/nuevo');
             $this->load->view('Layouts/footer');
         }else{
             redirect(base_url());
