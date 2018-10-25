@@ -280,6 +280,49 @@ class DataModel extends CI_Model
         $this->db->where('id',$id);
         return $this->db->update('TB_USUARIOS',$datos);
     }
+    //clientes
+    public function listGroupCliente(){
+        $query = $this->db->query("SELECT id,nombres,email,telefono FROM TB_CLIENTES");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function listSelectCliente(){
+        $query = $this->db->query("SELECT id,nombres FROM TB_CLIENTES");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function insertaCliente($datos){
+        $query = $this->db->insert('TB_CLIENTES',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaClienteById($id){
+        $query = $this->db->query("SELECT id,nombres,email,telefono FROM TB_CLIENTES WHERE id='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function actualizaClienteById($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_CLIENTES',$datos);
+    }
+    public function existeCliente($mail){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_CLIENTES WHERE email='$mail' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
 
 
 }
