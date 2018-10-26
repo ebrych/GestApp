@@ -5,8 +5,6 @@ class Locales extends CI_Controller{
   public $controlador='2';
   
   public function index (){
-    $this->load->helper('url');
-    $this->load->model('DataModel');
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
     $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -24,8 +22,6 @@ class Locales extends CI_Controller{
   }
   
   public function nuevo(){
-    $this->load->helper('url');
-    $this->load->model('DataModel');
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
     $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -42,8 +38,6 @@ class Locales extends CI_Controller{
   }
   
   public function agregarLocal(){
-    $this->load->helper('url');
-    $this->load->model('DataModel');
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
     $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -63,8 +57,6 @@ class Locales extends CI_Controller{
   }
   
   public function actualiza(){
-    $this->load->helper('url');
-    $this->load->model('DataModel');
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
     $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -83,8 +75,6 @@ class Locales extends CI_Controller{
   }
   
   public function actualizaDato(){
-     $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
