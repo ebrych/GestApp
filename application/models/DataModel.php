@@ -280,6 +280,8 @@ class DataModel extends CI_Model
         $this->db->where('id',$id);
         return $this->db->update('TB_USUARIOS',$datos);
     }
+
+
     //clientes
     public function listGroupCliente(){
         $query = $this->db->query("SELECT id,nombres,email,telefono FROM TB_CLIENTES");
@@ -322,6 +324,425 @@ class DataModel extends CI_Model
         $query = $this->db->query("SELECT count(*) as 'result' FROM TB_CLIENTES WHERE email='$mail' ");
         $rslt = $query->result();
         return $rslt[0]->result;
+    }
+
+    //servicios
+    public function insertaServiciosTarea($datos){
+        $query = $this->db->insert('TB_TAREA_SERVICIO',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function obtenerValorServicio($idServicio){
+        $valor=0;
+        $query = $this->db->query(" SELECT costo FROM TB_SERVICIOS where id='$idServicio' ");
+        if($query->num_rows() == 0){
+            return $valor;
+        }else{
+            $valor= $query->result();
+            return $valor[0]->costo;
+        }  
+    }
+    public function buscaTareaById($id){
+        $query = $this->db->query(" SELECT id,idLocal,idCliente,fecha,estado FROM TB_TAREAS WHERE id='$id'  ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function buscaServiciosTareaById($idTarea){
+        $query = $this->db->query(" SELECT trSr.idTarea as 'idTarea',trSr.idServicio  as 'idServicio' ,srv.descripcion FROM TB_TAREA_SERVICIO trSr INNER JOIN TB_SERVICIOS srv ON trSr.idServicio=srv.id WHERE idTarea='$idTarea'  ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function eliminaServicioTarea($idTarea,$idServicio){
+        $query = $this->db->query("DELETE FROM TB_TAREA_SERVICIO WHERE idTarea='$idTarea' AND idServicio='$idServicio' ");
+        return $query;
+    }
+    public function obtenerLocal($id){
+        $cargo=0;
+        $query = $this->db->query("SELECT idLocal FROM TB_USUARIOS WHERE id='$id' ");
+        if($query->num_rows() == 0){
+            return null;
+        }else{
+            $cargo= $query->result();
+            return $cargo[0]->idLocal;
+        }  
+    }
+    public function resumenTotalTarea($idTarea){
+        $query = $this->db->query("SELECT sr.descripcion as 'servicio',cat.descripcion as 'categoria',sr.costo 
+                                    FROM TB_TAREA_SERVICIO trSr INNER JOIN TB_SERVICIOS sr on sr.id=trSr.idServicio 
+                                    INNER JOIN TB_CATEGORIA_PRECIO_SERVICIO cat ON cat.id=sr.idCategoriaPrecio 
+                                    WHERE idTarea='$idTarea' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function montoTotalTarea($idTarea){
+        $total=0;
+        $subTotal=0;
+        $igv=0.18;
+        $query = $this->db->query("SELECT trSr.valor 
+                                    FROM TB_TAREA_SERVICIO trSr 
+                                    WHERE trSr.idTarea = '$idTarea' ");
+        foreach ($query->result() as $row){
+            $total=$total+$row->valor;
+        }
+        $igv=($total * $igv);
+        $subTotal=($total - $igv);
+        $data=array(
+            'total'=>$total,
+            'subtotal'=>$subTotal,
+            'igv'=>number_format($igv,2)
+        );
+        return $data;
+    }
+    public function agregaTrabajadorToTarea($datos){
+        $query = $this->db->insert('TB_USUARIO_TAREA',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function listarTrabajadoresDeTarea($idTarea){
+        $query = $this->db->query(" SELECT ustr.idTarea as 'tarea',us.id as 'idUser',us.nombres 
+                                    FROM TB_USUARIO_TAREA usTr INNER JOIN TB_USUARIOS us 
+                                    ON us.id=ustr.idUsuario  
+                                    WHERE ustr.idTarea='$idTarea'  ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function eliminaTrabajadorDeTarea($idTarea,$idTrabajador){
+        $query = $this->db->query("DELETE FROM TB_USUARIO_TAREA WHERE idTarea='$idTarea' AND idUsuario='$idTrabajador' ");
+        return $query;
+    }
+    public function buscarDatosBoleta($idTarea){
+        $query = $this->db->query(" SELECT serie,numero,fechaRegistro FROM TB_COMPROBANTE WHERE idTarea='$idTarea'  ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function insertaBoleta($datos){
+        $query = $this->db->insert('TB_COMPROBANTE',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaBoleta($idTarea){
+        $query = $this->db->query("SELECT COUNT(*) as 'result' FROM TB_COMPROBANTE WHERE idTarea='$idTarea' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
+    
+    //Servicios
+    public function listaTipoPrecio(){
+        $query = $this->db->query("SELECT id,descripcion FROM TB_CATEGORIA_PRECIO_SERVICIO");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function listarServicios(){
+        $query = $this->db->query("SELECT srv.id,srv.descripcion,cat.descripcion as 'categoria',
+                                srv.costo,
+                                (CASE WHEN srv.estado = 1 THEN 'Activo' 
+                                      WHEN srv.estado= 0 THEN 'Cancelado' 
+                                ELSE'Finalizado'END) AS 'estado'
+                                FROM TB_SERVICIOS srv INNER JOIN TB_CATEGORIA_PRECIO_SERVICIO 
+                                cat on srv.idCategoriaPrecio=cat.id ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function selectListServicio(){
+        $query = $this->db->query("SELECT srv.id,srv.descripcion as 'servicio',cat.descripcion as 'categoria',srv.costo 
+                                    FROM TB_SERVICIOS srv INNER JOIN TB_CATEGORIA_PRECIO_SERVICIO cat on 
+                                    srv.idCategoriaPrecio=cat.id WHERE estado > 0");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function insertaServicio($datos){
+        $query = $this->db->insert('TB_SERVICIOS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaServicioById($id){
+        $query = $this->db->query("SELECT id,descripcion,idCategoriaPrecio,costo,estado FROM TB_SERVICIOS WHERE id='$id' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function actualizaServicio($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_SERVICIOS',$datos);
+    }
+    public function agregarInsumoServicio($datos){
+        $query = $this->db->insert('TB_SERVICIO_INSUMO',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function eliminaInsumoServicio($idServicio,$idInsumo){
+        $query = $this->db->query("DELETE FROM TB_SERVICIO_INSUMO WHERE idServicio='$idServicio' AND idInsumo='$idInsumo' ");
+        return $query;
+    }
+    public function listarInsmoServicio($idServicio){
+        $query = $this->db->query("SELECT srIn.idServicio as 'idServicio',ins.id as 'idInsumo',ins.nombre,ins.descripcion  
+                                  FROM TB_SERVICIO_INSUMO srIn INNER JOIN TB_INSUMOS ins on ins.id=srIn.idInsumo 
+                                  WHERE srIn.idServicio='$idServicio' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    //asistencia
+    public function listarAsistenciadelDia($fecha){
+        $query = $this->db->query(" SELECT us.nombres,cr.descripcion as 'cargo',
+                                            lc.nombres as 'local',
+                                            asis.fecha, asis.entrada, asis.salida 
+                                    FROM TB_ASISTENCIAS as asis 
+                                    INNER JOIN TB_USUARIOS us ON asis.idUsuario = us.id
+                                    INNER JOIN TB_LOCALES lc ON lc.id=us.idLocal
+                                    INNER JOIN TB_CARGOS cr ON us.idCargo=cr.id 
+                                    WHERE asis.fecha='$fecha' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function buscaAsistencia($idUser,$date){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_ASISTENCIAS WHERE idUsuario='$idUser' AND fecha='$date'");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
+    public function registrarAsistencia($datos){
+        $query = $this->db->insert('TB_ASISTENCIAS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function actualizaAsistencia($idUser,$date,$datos){      
+        $this->db->where('idUsuario',$idUser);
+        $this->db->where('fecha',$date);
+        return $this->db->update('TB_ASISTENCIAS',$datos);
+    }
+    //reportes
+    public function listaTrabajadorReporte($mes){
+        $result=[];
+        $query = $this->db->query("SELECT usr.id, usr.nombres as 'usuario', lc.nombres as 'local',
+                                    cr.descripcion as 'cargo' 
+                                    FROM TB_USUARIOS usr
+                                    INNER JOIN TB_LOCALES lc ON lc.id=usr.idLocal
+                                    INNER JOIN TB_CARGOS cr ON cr.id=usr.idCargo
+                                    WHERE usr.id > 1  ");
+        foreach ($query->result() as $row){
+            $data=array(
+                'usuario' => $row->usuario,
+                'local'=> $row->local,
+                'cargo'=>$row->cargo,
+                'actividad'=>$this->reporteActividadTrabajador($row->id,$mes)
+            );
+            array_push($result,$data);
+        }
+        return $result;
+    }
+    public function reporteActividadTrabajador($idUser,$mes){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_USUARIO_TAREA usTr
+                                    INNER JOIN TB_TAREAS tr ON tr.id=usTr.idTarea
+                                    WHERE usTr.idUsuario='$idUser' 
+                                    AND MONTH(tr.fecha) ='$mes'
+                                    AND tr.estado='2' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
+    public function listaLocalesReporte($mes){
+        $result=[];
+        $query = $this->db->query(" SELECT lc.id,lc.nombres,lc.direccion 
+                                    FROM TB_LOCALES lc 
+                                    WHERE estado = 1 ");
+        foreach ($query->result() as $row){
+            $data=array(
+                'id' => $row->id,
+                'nombre'=> $row->nombres,
+                'direccion'=>$row->direccion,
+                'actividad'=>$this->reporteActividadLocal($row->id,$mes)
+            );
+            array_push($result,$data);
+        }
+        return $result;
+    }
+    public function reporteActividadLocal($idLocal,$mes){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_TAREAS tr 
+                                    WHERE idLocal='$idLocal' AND tr.estado='2' 
+                                    AND MONTH(tr.fecha)='$mes' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
+    //reservas
+    public function listarReservas(){
+        $query = $this->db->query(" SELECT rs.id,cl.nombres,cl.email,cl.telefono,lc.nombres as 'local',
+                                    rs.fechaAtencion,rs.horaAtencion,fechaRegistro 
+                                    FROM TB_RESERVAS rs 
+                                    INNER JOIN TB_CLIENTES cl on rs.idCliente=cl.id 
+                                    INNER JOIN TB_LOCALES lc ON lc.id=rs.idLocal 
+                                    WHERE rs.estado=1 ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }
+    }
+    public function agregarReserva(){
+        $query = $this->db->insert('TB_RESERVAS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function agregaServiciosReseva(){
+        $query = $this->db->insert('TB_SERVICIO_RESERVA',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function updateReserva($id,$data){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_RESERVAS',$data);
+    }
+    public function aceptaReserva($id){
+        try {
+            //inserta cabecera(reserva a tarea)
+            $query = $this->db->query(" SELECT rs.idLocal as 'local',rs.idCliente as 'cliente', rs.fechaAtencion,
+                                        rs.horaAtencion  
+                                        FROM TB_RESERVAS rs 
+                                        WHERE rs.id='$id' AND estado = 1");
+            foreach ($query->result() as $row){
+                $cabecera=array(
+                'idLocal'=>$row->local,
+                'idCliente'=>$row->cliente,
+                'fecha'=>$row->fechaAtencion,
+                'hora'=>$row->horaAtencion
+                );    
+            }
+            $this->insertaTarea($cabecera);
+            //busca idTarea
+            $idTarea=$this->buscaTarea($cabecera['fecha'],$cabecera['hora'],$cabecera['idLocal'],$cabecera['idCliente']);
+            
+            //inserta servicios
+            $query = $this->db->query(" SELECT idServicio FROM TB_SERVICIO_RESERVA WHERE idReserva='$id' ");
+            foreach ($query->result() as $row){
+            $data=array(
+            'idServicio'=>$row->idServicio,
+            'idTarea'=>$idTarea,
+            'valor' =>$this->obtenerValorServicio($row->idServicio)
+            );
+            $this->insertaServiciosTarea($data);
+            }
+            //actualiza reserva
+            $estRes=array(
+            'estado'=>'2'
+            );
+            $this->updateReserva($id,$estRes);
+            return true;
+        }catch(Exception $e){
+            return $e;
+        }
+    }
+    
+    //web
+    public function infoWeb(){
+        $query = $this->db->query(" SELECT id,titulo,descripcion,orden FROM TB_WEB_INFO ORDER BY orden ");
+        return $query->result(); 
+    }
+    
+    public function agregarInfoWeb($datos){
+        $query = $this->db->insert('TB_WEB_INFO',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    
+    public function inforWebById($id){
+        $query = $this->db->query(" SELECT id,titulo,descripcion,orden FROM TB_WEB_INFO WHERE id='$id' ");
+        return $query->result(); 
+    }
+    
+    public function  updateInfoWeb($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_WEB_INFO',$datos);
+    }
+    
+    public function deleteInfoWeb($id){
+        $this->db->where('id', $id);
+        $this->db->delete('TB_WEB_INFO');
+    }
+    
+    public function contactoWeb($id){
+        $query = $this->db->query(" SELECT numero,mail,facebook,instagram FROM TB_WEB_CONTACTO WHERE id='$id' ");
+        return $query->result(); 
+    }
+    
+    public function  updateContactoWeb($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_WEB_CONTACTO',$datos);
+    }
+
+    //generarTextos
+    public function generatePass($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
 
