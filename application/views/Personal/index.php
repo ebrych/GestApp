@@ -2,7 +2,6 @@
 
 <div class="container">
 <h1>Personal</h1> 
-  <div style="font-size:20px;color:#007bff;cursor: pointer;" > </div>
   <a href="<?php echo base_url() ?>Personal /nuevo" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Personal</a>
   <p>&nbsp;</p>
 
