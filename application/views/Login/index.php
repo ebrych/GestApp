@@ -1,6 +1,6 @@
 
 <div class="container">
-    <form action="./session" method="POST" class="form-signin" style="margin-top:-50px">
+    <form action="<?php echo base_url() ?>/Welcome/session" method="POST" class="form-signin" style="margin-top:-50px">
         <div align="center">
           <img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
         </div>

@@ -8,7 +8,7 @@ class Personal extends CI_Controller{
 	public function index(){
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
-		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 			$info['MyNombre']=$this->session->userdata('username');
@@ -25,7 +25,7 @@ class Personal extends CI_Controller{
 	public function nuevo(){
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
-		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $info['MyNombre']=$this->session->userdata('username');
@@ -42,7 +42,7 @@ class Personal extends CI_Controller{
 	public function agregaPersonal(){
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
-		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $datos=array(
@@ -59,7 +59,7 @@ class Personal extends CI_Controller{
 	public function actualiza($personal_id){
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
-		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $data['locales']=$this->DataModel->LocalSelectList();
@@ -77,7 +77,7 @@ class Personal extends CI_Controller{
 	public function actualizaDato(){
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
-		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $idUsr =$this->input->post('idUsuario');

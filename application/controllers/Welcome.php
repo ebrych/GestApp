@@ -5,7 +5,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{	
-		$this->load->view('Layouts/header');
+		$this->load->view('Layouts/headerLgn');
 		$this->load->view('Login/index');
 		$this->load->view('Layouts/footer');
 	}
@@ -35,10 +35,10 @@ class Welcome extends CI_Controller {
 		if($session==true){
 			$cargo=$this->session->userdata('cargo');
 			$info['MyNombre']=$this->session->userdata('username');
-			$data['Permisos']=$this->DataBaseModel->obtenerPermisos($cargo);
+			$data['Permisos']=$this->DataModel->obtenerPermisos($cargo);
 			$this->load->view('Layouts/header');
 			$this->load->view('Layouts/menu',$info);
-			$this->load->view('panel',$data);
+			$this->load->view('Panel/index',$data);
 			$this->load->view('Layouts/footer');	
 		}else{
 			redirect('http://'.base_url());
