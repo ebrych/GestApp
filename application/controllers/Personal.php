@@ -45,12 +45,27 @@ class Personal extends CI_Controller{
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
-		    $datos=array(
-			    'nombre' => $this->input->post('nombre'),
-			    'descripcion' => $this->input->post('descripcion'),
-			    'estado' => $this->input->post('estado')
-			);
-		    $this->DataModel->agregarUsuario($datos);
+		    $nmbrs=$this->input->post('nombre');
+		    $crg=$this->input->post('cargo');
+		    $lcl=$this->input->post('local');
+		    $ml=$this->input->post('email');
+		    $tfn=$this->input->post('telefono');
+		    $est=$this->input->post('estado');
+		    $fech=date("Y-m-d");
+		    $existe=$this->DataModel->buscaUsuario($ml);
+		    if($existe==0){
+			    $data=array(
+				'nombres' => $nmbrs,
+				'idCargo' => $crg,
+				'idLocal' => $lcl,
+				'email' => $ml,
+				'telefono' => $tfn,
+				'pws' => $this->DataModel->generatePass(4),
+				'fechaRegistro' => $fech,
+				'estado'=>$est
+			    );
+			   $this->DataModel->agregarUsuario($data); 
+		    }
 		    redirect(base_url()+"Personal/nuevo");
 		}else{
 		    redirect(base_url());
