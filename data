@@ -1,43 +1,45 @@
-foreach ($query->result() as $row){
-                $this->db->query("update TB_USUARIOS set dinamico='$token' where id='$row->id' ");
-                $data = array(
-                  'id' => $row->id,
-                  'username'  => $row->nombres,
-                  'token' => $token
-                );
-            }
+<?php
+    foreach ($listaEventos as $row){
+?>
+xx 
 
 
 
-            //estado tarea
-                $tarea=$this->input->post('tarea');
-                $estado=$this->DataModel->buscaestadoTarea($tarea);
-                if($estado != 1){
-                    $data['datos']= null;
-                }else{
-                    $servicio=$this->input->post('servicio');
-                    $datos=array(
-                        'idTarea'=>$tarea,
-                        'idServicio'=>$servicio,
-                        'valor' =>$this->DataModel->obtenerValorServicio($servicio)
-                    );
-                    $data['datos']=$this->DataModel->insertaServiciosTarea($datos);
-                }
+<?php 
+    } 
+?>
+<a href="" style="font-size: 20px;color:#007bff;"><i class="fas fa-pen"></i></a>
 
 
+<div class="container">
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <table width="100%">
+                <tr>
+                    <td width="60%">titulo</td>
+                    <td width="40%">iconos</td>
+                </tr>
+                <tr>
+                    <td colspan="2">xxxx</td>
+                </td>
+            </table>    
+        </a>
+    </div>
+</div>
 
 
-
-
-$estado=$this->DataModel->buscaestadoTarea($tarea);
-                if($estado != 1){
-                    $data['datos']= null;
-                }else{
-                    $servicio=$this->input->post('servicio');
-                    $datos=array(
-                        'idTarea'=>$tarea,
-                        'idServicio'=>$servicio,
-                        'valor' =>$this->DataModel->obtenerValorServicio($servicio)
-                    );
-                    $data['datos']=$this->DataModel->insertaServiciosTarea($datos);
-                }
+ <table width="100%">
+                <tr>
+                    <td width="60%"><h5 class="mb-1" class="nombre"><?php echo $row->nombres ?></h5></td>
+                    <td width="40%">
+                    </td>
+                </tr>
+                <tr>
+                    <td><i class="fas fa-address-card"></i><?php echo $row->cargo ?><br/></td>
+                    <td><i class="fas fa-map-marker"></i> <?php echo $row->local ?><br/><td>
+                    <td><i class="fas fa-at"></i><?php echo $row->email ?><br/><td>
+                    <td><i class="fas fa-phone-square"></i><?php echo $row->telefono ?><br/><td>
+                </tr>
+                <tr>
+                </tr>
+            </table>    

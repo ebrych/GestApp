@@ -1,0 +1,39 @@
+<p>&nbsp;</p>
+
+<div class="container">
+<h1>Personal</h1> 
+  <div style="font-size:20px;color:#007bff;cursor: pointer;" > </div>
+  <a href="#" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Personal</a>
+  <p>&nbsp;</p>
+
+    <div class="list-group">
+        <?php
+            foreach ($personal as $row){
+        ?>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="row">
+                <div class="col-8">
+                    <h5 class="nombre" style="font-weight: bold;font-size:25px"> <?php echo $row->nombres ?></h5>
+                    <i class="fas fa-address-card"></i> <?php echo $row->cargo ?> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <i class="fas fa-map-marker"></i> <?php echo $row->local ?><br/>
+                    <i class="fas fa-at"></i> <?php echo $row->email ?> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <i class="fas fa-phone-square"></i> <?php echo $row->telefono ?><br/>
+                    <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?> <br/>
+                </div>
+                <div class="col-4" align="right">
+                    <i class="fas fa-pen" onclick="hrefTo('nuevo')" style="font-size: 20px;color:#007bff;"></i>
+                </div>
+            </div>
+        </a>
+        <?php 
+            } 
+        ?>
+        
+    </div>
+</div>
+
+<script>
+function hrefTo(ruta){
+    alert("mueve a"+ruta);
+}
+</script>

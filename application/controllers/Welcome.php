@@ -35,7 +35,7 @@ class Welcome extends CI_Controller {
 		if($session==true){
 			$cargo=$this->session->userdata('cargo');
 			$info['MyNombre']=$this->session->userdata('username');
-			$data['Permisos']=$this->DataModel->obtenerPermisos($cargo);
+			$data['permisos']=$this->DataModel->obtenerPermisos($cargo);
 			$this->load->view('Layouts/header');
 			$this->load->view('Layouts/menu',$info);
 			$this->load->view('Panel/index',$data);
