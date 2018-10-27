@@ -3,7 +3,7 @@
 <div class="container">
 <h1>Personal</h1> 
   <div style="font-size:20px;color:#007bff;cursor: pointer;" > </div>
-  <a href="#" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Personal</a>
+  <a href="<?php echo base_url() ?>Personal /nuevo" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Personal</a>
   <p>&nbsp;</p>
 
     <div class="list-group">
@@ -21,7 +21,7 @@
                     <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?> <br/>
                 </div>
                 <div class="col-4" align="right">
-                    <i class="fas fa-pen" onclick="hrefTo('nuevo')" style="font-size: 20px;color:#007bff;"></i>
+                    <i class="fas fa-pen" onclick="hrefToAct('<?php echo $row->id ?>')" style="font-size: 20px;color:#007bff;"></i>
                 </div>
             </div>
         </a>
@@ -33,7 +33,7 @@
 </div>
 
 <script>
-function hrefTo(ruta){
-    alert("mueve a"+ruta);
-}
+  function hrefToAct(id){
+      location.href="<?php echo base_url() ?>Personal/actualiza/"+id;
+  }
 </script>
