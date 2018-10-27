@@ -7,7 +7,7 @@ class Welcome extends CI_Controller {
 	{	
 		$this->load->helper('url');
 		$this->load->view('Layouts/header');
-		$this->load->view('login');
+		$this->load->view('Login/index');
 		$this->load->view('Layouts/footer');
 	}
 

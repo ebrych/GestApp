@@ -13,9 +13,9 @@
     <meta name="apple-mobile-web-app-title" content="Gestion de Servicios">
     <meta name="application-name" content="Gestion de Servicios">
     <title>Gestión de Servicios</title>
-    <link rel="stylesheet" href="<?php echo base_url() ?>assets/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://localhost/GestApp/assets/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Sarala" rel="stylesheet">
-    <link href="<?php echo base_url() ?>assets/css/signin.css" rel="stylesheet">
+    <link href="http://localhost/GestApp/assets/css/signin.css" rel="stylesheet">
   </head>
   <body style="font-family: 'Sarala', sans-serif;background-color:#f5f5f5">
