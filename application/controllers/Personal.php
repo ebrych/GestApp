@@ -6,8 +6,6 @@ class Personal extends CI_Controller{
 	public $controlador='1';
 
 	public function index(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -25,8 +23,6 @@ class Personal extends CI_Controller{
 	 }
 	
 	public function nuevo(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -44,8 +40,6 @@ class Personal extends CI_Controller{
 		}
 	}
 	public function agregaPersonal(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -63,8 +57,6 @@ class Personal extends CI_Controller{
 		}
 	}
 	public function actualiza($personal_id){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -83,8 +75,6 @@ class Personal extends CI_Controller{
 		}
 	}
 	public function actualizaDato(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -105,8 +95,6 @@ class Personal extends CI_Controller{
 		    redirect(base_url());
 		}
 	}
-	
-	
 	
 
 

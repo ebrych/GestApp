@@ -3,8 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Clientes extends CI_Controller{
 
   public function index(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -21,8 +19,6 @@ class Clientes extends CI_Controller{
         }
   }
   public function nuevo(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -38,8 +34,6 @@ class Clientes extends CI_Controller{
         }
   }
   public function agregaCliente(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -57,8 +51,6 @@ class Clientes extends CI_Controller{
         }
   }
   public function actualiza($cliente_id){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -75,8 +67,6 @@ class Clientes extends CI_Controller{
         }
   }
   public function actualizaDato(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)

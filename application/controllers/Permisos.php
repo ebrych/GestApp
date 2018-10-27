@@ -3,8 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Permisos extends CI_Controller{
 
   public function index(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -22,8 +20,6 @@ class Permisos extends CI_Controller{
   }
   
   public function permisoCargo($cargo_id){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -43,8 +39,6 @@ class Permisos extends CI_Controller{
   }
   
   public function agregaPermiso(){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
@@ -64,8 +58,6 @@ class Permisos extends CI_Controller{
   }
   
   public function eliminaPermiso($cargo_id,$permiso_id){
-        $this->load->helper('url');
-        $this->load->model('DataModel');
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)

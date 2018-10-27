@@ -5,15 +5,12 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{	
-		$this->load->helper('url');
 		$this->load->view('Layouts/header');
 		$this->load->view('Login/index');
 		$this->load->view('Layouts/footer');
 	}
 
 	public function session(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$user = $this->input->post('username');
 		$pass= $this->input->post('password');
 		$dtosSess=$this->DataModel->session($user,$pass);
@@ -26,8 +23,6 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function logout(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$idUsr=$this->session->userdata('id');
 		$token=$this->session->userdata('token');
 		$this->DataModel->logout($idUsr,$token);
@@ -36,8 +31,6 @@ class Welcome extends CI_Controller {
 	}
 
 	public function panel(){
-		$this->load->helper('url');
-		$this->load->model('DataModel');
 		$session=$this->session->userdata('logged');
 		if($session==true){
 			$cargo=$this->session->userdata('cargo');
