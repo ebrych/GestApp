@@ -91,7 +91,7 @@ class Cargos extends CI_Controller {
         }
     }
     
-    public function permisos($cargo_id){
+    public function permisos($cargo_id,$cargo_nombre){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
