@@ -34,7 +34,7 @@
       if(controlador==1){
         location.href="<?php echo base_url() ?>Cargos/actualiza/"+id;
       }else if(controlador==2){
-        location.href="<?php echo base_url() ?>Cargos/agregarCargo/"+id;
+        location.href="<?php echo base_url() ?>Cargos/permisos/"+id;
       }
       
   }
