@@ -92,6 +92,23 @@ class Cargos extends CI_Controller {
         }
     }
     
+    public function permisos(){
+        $session=$this->session->userdata('logged');
+        $cargo=$this->session->userdata('cargo');
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        //sesion y permisos
+        if($session==true && $permiso != 0){
+            $info['MyNombre']=$this->session->userdata('username');
+            $data['permisos']= $this->DataModel->listarPermisos();
+            $this->load->view('Layouts/header');
+            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Cargos/index',$data);
+            $this->load->view('Layouts/footer');	
+        }else{
+            redirect(base_url());
+        }
+    }
+    
 
 }
     
