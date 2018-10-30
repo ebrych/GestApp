@@ -15,8 +15,8 @@
                     <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?> &nbsp;&nbsp;|&nbsp;&nbsp;
                 </div>
                 <div class="col-4" align="right">
-                    <i class="fas fa-pen" onclick="hrefToAct(1,<?php echo $row->id ?>)" style="font-size: 20px;color:#007bff;"></i>
-                    <i class="fas fa-key" onclick="hrefToAct(2,<?php echo $row->id ?>)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+                    <i class="fas fa-pen" onclick="hrefToAct(1,<?php echo $row->id ?>,'SN')" style="font-size: 20px;color:#007bff;"></i>
+                    <i class="fas fa-key" onclick="hrefToAct(2,<?php echo $row->id ?>,'<?php echo $row->descripcion  ?>')" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
                 </div>
             </div>
         </a>
@@ -30,11 +30,11 @@
 
 
 <script>
-  function hrefToAct(controlador,id){
+  function hrefToAct(controlador,id,nombre){
       if(controlador==1){
         location.href="<?php echo base_url() ?>Cargos/actualiza/"+id;
       }else if(controlador==2){
-        location.href="<?php echo base_url() ?>Cargos/permisos/"+id;
+        location.href="<?php echo base_url() ?>Cargos/permisos/"+id+"/"+nombre;
       }
       
   }
