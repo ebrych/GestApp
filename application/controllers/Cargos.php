@@ -50,21 +50,20 @@ class Cargos extends CI_Controller {
                 'estado' => $this->input->post('estado')
             );
             $this->DataModel->insertacargo($datos);
-            redirect(base_url()+"Cargos/nuevo");
+            redirect(base_url()."Cargos/nuevo");
         }else{
             redirect(base_url());
         }
     }
     
-    public function actualiza(){
+    public function actualiza($cargo_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $idCargo = $this->input->post('cargoId');
             $info['MyNombre']=$this->session->userdata('username');
-            $data['cargo']=$this->DataModel->buscacargo($idCargo);
+            $data['cargo']=$this->DataModel->buscacargo($cargo_id);
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu',$info);
             $this->load->view('Cargos/actualiza',$data);
@@ -86,24 +85,57 @@ class Cargos extends CI_Controller {
                 'estado' => $this->input->post('estado')
             );
             $this->DataModel->actualizacargo($idCargo,$datos);
-            redirect(base_url()+"Cargos");
+            redirect(base_url()."Cargos");
         }else{
             redirect(base_url());
         }
     }
     
-    public function permisos(){
+    public function permisos($cargo_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
+            $data['misPermisos']=$this->DataModel->listaPermisosById($cargo_id);
             $data['permisos']= $this->DataModel->listarPermisos();
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu',$info);
-            $this->load->view('Cargos/index',$data);
+            $this->load->view('Cargos/permisos',$data);
             $this->load->view('Layouts/footer');	
+        }else{
+            redirect(base_url());
+        }
+    }
+    
+    public function agregarPermiso(){
+        $session=$this->session->userdata('logged');
+        $cargo=$this->session->userdata('cargo');
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        //sesion y permisos
+        if($session==true && $permiso != 0){
+            $crgo=$this->input->post('cargo');
+            $prms=$this->input->post('permiso');
+            $data=array(
+                        'idCargo' => $crgo,
+                        'idPermiso' => $prms
+                    );
+            $this->DataModel->insertaPermiso($data);
+            redirect(base_url()."Cargos/permisos".$cargo_id);
+        }else{
+            redirect(base_url());
+        }
+    }
+    
+    public function eliminaPermiso($cargo_id,$permiso_id){
+        $session=$this->session->userdata('logged');
+        $cargo=$this->session->userdata('cargo');
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        //sesion y permisos
+        if($session==true && $permiso != 0){
+             $this->DataModel->eliminaPermiso($cargo_id,$permiso_id);
+            redirect(base_url()."Cargos/permisos/".$cargo_id);
         }else{
             redirect(base_url());
         }
