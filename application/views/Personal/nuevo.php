@@ -14,7 +14,7 @@
               <label>Local</label>
               <select class="form-control" name="local"  required >
                   <?php
-                    foreach ($locales as $row){
+                    foreach ($permisos as $row){
                   ?>
                     <option value="<?php echo $row->id ?>"><?php echo $row->nombres ?></option>
                   <?php 
