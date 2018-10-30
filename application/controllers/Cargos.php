@@ -98,6 +98,7 @@ class Cargos extends CI_Controller {
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
+            $data['cargoNombre']=$cargo_nombre;
             $data['misPermisos']=$this->DataModel->listaPermisosById($cargo_id);
             $data['permisos']= $this->DataModel->listarPermisos();
             $this->load->view('Layouts/header');
