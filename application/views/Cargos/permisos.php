@@ -11,7 +11,7 @@
     <lable>Permisos</lable>
     <select class="form-control" name="permiso"  required>
       <?php
-          foreach ($locales as $row){
+          foreach ($permisos as $row){
       ?>
         <option  value="<?php echo $row->id ?>"><?php echo $row->descripcion ?></option>
       <?php 
@@ -19,4 +19,23 @@
       ?>
      </select>
   </form>
+  
+    <br/>
+    <hr/>
+    <label style="color:#bdc3c7">Lista de Permisos</label>
+    <div class="row">
+      <?php
+          foreach ($misPermisos as $row){
+      ?>
+            <div class="col-9"><?php echo $row->descripcion ?></div>
+            <div class="col-3" align="center">
+              <a href="<?php echo base_url() ?>Cargos/eliminaPermiso(<?php echo $cargoId ?>,<?php echo $row->id ?>)" style="font-size:20px;color:#007bff;cursor: pointer;">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+      <?php 
+           } 
+      ?>
+    </div>
+    <p>&nbsp;</p> 
 </div>
