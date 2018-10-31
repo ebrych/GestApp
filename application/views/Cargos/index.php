@@ -15,8 +15,7 @@
                     <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?> &nbsp;&nbsp;|&nbsp;&nbsp;
                 </div>
                 <div class="col-4" align="right">
-                    <i class="fas fa-pen" onclick="hrefToAct(1,<?php echo $row->id ?>,'SN')" style="font-size: 20px;color:#007bff;"></i>
-                    <i class="fas fa-key" onclick="hrefToAct(2,<?php echo $row->id ?>,'<?php echo $row->descripcion  ?>')" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+                    <i class="fas fa-pen" onclick="hrefToAct(1,<?php echo $row->id ?>)" style="font-size: 20px;color:#007bff;"></i>
                 </div>
             </div>
         </a>
