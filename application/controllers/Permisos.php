@@ -5,7 +5,7 @@ class Permisos extends CI_Controller{
   public function index(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -22,7 +22,7 @@ class Permisos extends CI_Controller{
   public function permisoCargo($cargo_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -41,7 +41,7 @@ class Permisos extends CI_Controller{
   public function agregaPermiso(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $crgo=$this->input->post('cargo');
@@ -60,7 +60,7 @@ class Permisos extends CI_Controller{
   public function eliminaPermiso($cargo_id,$permiso_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $data['datos']= $this->DataModel->eliminaPermiso($cargo_id,$permiso_id);
