@@ -66,7 +66,7 @@ class Personal extends CI_Controller{
 			    );
 			   $this->DataModel->agregarUsuario($data); 
 		    }
-		    redirect(base_url()+"Personal/nuevo");
+		    redirect(base_url()."Personal/nuevo");
 		}else{
 		    redirect(base_url());
 		}
@@ -105,7 +105,7 @@ class Personal extends CI_Controller{
 			    'estado' =>  $this->input->post('estado')
                     );
                     $this->DataModel->actualizaUsuario($idUsr,$datos);
-		    redirect(base_url()+"Personal/");
+		    redirect(base_url()."Personal/");
 		}else{
 		    redirect(base_url());
 		}

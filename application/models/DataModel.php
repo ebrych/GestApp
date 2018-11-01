@@ -57,7 +57,7 @@ class DataModel extends CI_Model
         }  
     }
     public function cargosSelectList(){
-        $query = $this->db->query("SELECT id,descripcion FROM TB_CARGOS WHERE estado='1' ");
+        $query = $this->db->query("SELECT id,descripcion FROM TB_CARGOS WHERE estado='1' AND id>1 ");
         if($query->num_rows() == 0){
         return null;
         }else{

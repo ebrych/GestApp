@@ -9,7 +9,7 @@
     <ul class="navbar-nav mr-auto"></ul>
     <ul class="navbar-nav  navbar-right">
       <li class="nav-item" id="idPanel">
-            <a class="nav-link" href="panel"><i class="fas fa-columns"></i> Panel Principal</a>
+            <a class="nav-link" href="<?php echo base_url() ?>Welcome/Panel"><i class="fas fa-columns"></i> Panel Principal</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"> <i class="fas fa-cog"></i> Opciones</a>

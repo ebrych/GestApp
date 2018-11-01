@@ -1,6 +1,6 @@
 <p>&nbsp;</p>
 
-<div class="container">
+<div class="container"> 
   <h1>Agregar Personal</h1> 
   <a href="<?php echo base_url() ?>Personal/" style="font-size:20px;color:#007bff;"><i class="fas fa-arrow-left"></i> Regresar </a>
   <p>&nbsp;</p>
@@ -14,7 +14,7 @@
               <label>Local</label>
               <select class="form-control" name="local"  required >
                   <?php
-                    foreach ($permisos as $row){
+                    foreach ($locales as $row){
                   ?>
                     <option value="<?php echo $row->id ?>"><?php echo $row->nombres ?></option>
                   <?php 
