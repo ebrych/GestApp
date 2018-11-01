@@ -78,11 +78,10 @@ class Personal extends CI_Controller{
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $data['locales']=$this->DataModel->LocalSelectList();
-		    $data['cargos']=$this->DataModel->cargosSelectList();
-		    $info['MyNombre']=$this->session->userdata('username');
-		    $data['personal']=$this->session->listaUsuarioById($personal_id);
+		    $data['cargos']= $this->DataModel->cargosSelectList();
+		    $data['personal']=$this->DataModel->listaUsuarioById($personal_id);
 		    $this->load->view('Layouts/header');
-		    $this->load->view('Layouts/menu',$info);
+		    $this->load->view('Layouts/menu');
 		    $this->load->view('Personal/actualiza',$data);
 		    $this->load->view('Layouts/footer');
 		}else{
@@ -97,7 +96,7 @@ class Personal extends CI_Controller{
 		if($session==true && $permiso != 0){
 		    $idUsr =$this->input->post('idUsuario');
                     $datos=array(
-			    'nombres' => $this->input->post('nombres'),
+			    'nombres' => $this->input->post('nombre'),
 			    'idCargo' => $this->input->post('cargo'),
 			    'idLocal' => $this->input->post('local'),
 			    'email' => $this->input->post('email'),

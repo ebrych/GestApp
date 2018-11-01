@@ -7,13 +7,12 @@ class Locales extends CI_Controller{
   public function index (){
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
-    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
     //sesion y permisos
     if($session==true && $permiso != 0){
-         $info['MyNombre']=$this->session->userdata('username');
          $data['locales']= $this->DataModel->LocalGroupList();
          $this->load->view('Layouts/header');
-         $this->load->view('Layouts/menu',$info);
+         $this->load->view('Layouts/menu');
          $this->load->view('Locales/index',$data);
          $this->load->view('Layouts/footer');	
      }else{
@@ -24,12 +23,11 @@ class Locales extends CI_Controller{
   public function nuevo(){
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
-    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
     //sesion y permisos
     if($session==true && $permiso != 0){
-         $info['MyNombre']=$this->session->userdata('username');
          $this->load->view('Layouts/header');
-         $this->load->view('Layouts/menu',$info);
+         $this->load->view('Layouts/menu');
          $this->load->view('Locales/nuevo');
          $this->load->view('Layouts/footer');
     }else{
@@ -40,7 +38,7 @@ class Locales extends CI_Controller{
   public function agregarLocal(){
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
-    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
        //sesion y permisos
        if($session==true && $permiso != 0){
             $datos=array(
@@ -50,23 +48,22 @@ class Locales extends CI_Controller{
                     'estado' => $this->input->post('estado')
                 );
             $this->DataModel->insertaLocal($datos);
-            redirect(base_url()+"Locales/nuevo");
+            redirect(base_url()."Locales/nuevo");
         }else{
             redirect(base_url());
     }
   }
   
-  public function actualiza(){
+  public function actualiza($local_id){
     $session=$this->session->userdata('logged');
     $cargo=$this->session->userdata('cargo');
-    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+    $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
     //sesion y permisos
     if($session==true && $permiso != 0){
          $idLocal = $this->input->post('localId');
-         $info['MyNombre']=$this->session->userdata('username');
-         $data['local']=$this->DataModel->buscaLoca($idLocal);
+         $data['local']=$this->DataModel->buscaLoca($local_id);
          $this->load->view('Layouts/header');
-         $this->load->view('Layouts/menu',$info);
+         $this->load->view('Layouts/menu');
          $this->load->view('Locales/actualiza',$data);
          $this->load->view('Layouts/footer');
     }else{
@@ -77,7 +74,7 @@ class Locales extends CI_Controller{
   public function actualizaDato(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
              $idLocal=$this->input->post('idLocal');
@@ -88,7 +85,7 @@ class Locales extends CI_Controller{
                'estado' => $this->input->post('estado')
             );
             $this->DataModel->actualizaLocal($idLocal,$datos);
-            redirect(base_url()+"Locales");
+            redirect(base_url()."Locales");
         }else{
             redirect(base_url());
         }

@@ -12,29 +12,44 @@
               <label>Telefono</label>
               <input type="text" class="form-control" name="telefono" value="<?php echo $personal[0]->telefono ?>" >
               <label>Local</label>
-              <select class="form-control" name="local"  required value="<?php echo $personal[0]->idLocal  ?>">
+              <select class="form-control" name="local"  required>
                   <?php
-                    foreach ($locales as $row){
+                    $select="";
+                    foreach ($locales as $row){ 
+                      if($personal[0]->idLocal==$row->id){ $select="selected";}else { $select="";}
                   ?>
-                    <option value="<?php echo $row->id ?>"><?php echo $row->nombres ?></option>
+                    <option value="<?php echo $row->id ?>" <?php echo $select; ?> ><?php echo $row->nombres ?></option>
                   <?php 
                     } 
                   ?>
               </select>
               <label>Cargo</label>
-              <select class="form-control" name="cargo"  required value="<?php echo $personal[0]->idCargo ?>">
+              <select class="form-control" name="cargo"  required>
                   <?php
+                    $select="";
                     foreach ($cargos as $row){
+                      if($personal[0]->idCargo==$row->id){ $select="selected";}else { $select="";}
                   ?>
-                    <option value="<?php echo $row->id ?>"><?php echo $row->descripcion ?></option>
+                    <option value="<?php echo $row->id ?>" <?php echo $select; ?> ><?php echo $row->descripcion ?></option>
                   <?php 
                     } 
                   ?>
               </select>
               <label>Estado</label>
               <select class="form-control" name="estado" required  value="<?php echo $personal[0]->idEstado ?>" >
-                  <option value="1">Activo</option>
-                  <option value="0">Inactivo</option>
+                  <?php 
+                    $act="";
+                    $des="";
+                    if($personal[0]->idEstado==1){
+                      $act="selected";
+                      $des="";
+                    }else{
+                      $act="";
+                      $des="selected";
+                    }
+                  ?>
+                  <option value="1" <?php echo $act ?>>Activo</option>
+                  <option value="0" <?php echo $des ?>>Inactivo</option>
               </select><br/>
               <button class="btn btn-primary btn-block" type="submit">Registrar Personal</button> 
    </form>
