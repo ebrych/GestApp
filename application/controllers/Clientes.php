@@ -45,7 +45,7 @@ class Clientes extends CI_Controller{
                     'telefono' => $this->input->post('telefono'),
                 );
             $this->DataModel->insertaCliente($datos);
-            redirect(base_url()+"Clientes/nuevo");
+            redirect(base_url()."Clientes/nuevo");
         }else{
             redirect(base_url());
         }
@@ -81,7 +81,7 @@ class Clientes extends CI_Controller{
                 $data['datos']=$this->DataModel->actualizaClienteById($idCliente,$datos);
                 
             $this->DataModel->actualizaInsumo($idInsumo,$datos);
-            redirect(base_url()+"Clientes");
+            redirect(base_url()."Clientes");
         }else{
             redirect(base_url());
         }
