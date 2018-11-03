@@ -61,7 +61,7 @@ class Insumos extends CI_Controller {
         if($session==true && $permiso != 0){
             $idInsumo = $this->input->post('insumoId');;
             $info['MyNombre']=$this->session->userdata('username');
-            $data['cargo']=$this->DataModel->buscaInsumo($idInsumo);
+            $data['insumo']=$this->DataModel->buscaInsumo($idInsumo);
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu',$info);
             $this->load->view('Insumos/actualiza',$data);
