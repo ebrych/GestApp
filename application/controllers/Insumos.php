@@ -47,7 +47,7 @@ class Insumos extends CI_Controller {
                     'estado' => $this->input->post('estado')
                 );
             $this->DataModel->insertaInsumo($datos);
-            redirect(base_url()+"Insumos/nuevo");
+            redirect(base_url()."Insumos/nuevo");
         }else{
             redirect(base_url());
         }
@@ -84,7 +84,7 @@ class Insumos extends CI_Controller {
                     'estado' => $this->input->post('estado')
                 );
             $this->DataModel->actualizaInsumo($idInsumo,$datos);
-            redirect(base_url()+"Insumos");
+            redirect(base_url()."Insumos");
         }else{
             redirect(base_url());
         }
