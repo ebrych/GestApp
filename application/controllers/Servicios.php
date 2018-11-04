@@ -10,7 +10,7 @@ class Servicios extends CI_Controller{
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
-            $data['cargos']= $this->DataModel->listarServicios();
+            $data['servicios']= $this->DataModel->listarServicios();
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu',$info);
             $this->load->view('Servicios/index',$data);
@@ -26,11 +26,10 @@ class Servicios extends CI_Controller{
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $info['MyNombre']=$this->session->userdata('username');
             $data['tipoPrecio']= $this->DataModel->listaTipoPrecio();
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
-            $this->load->view('Servicios/nuevo');
+            $this->load->view('Layouts/menu');
+            $this->load->view('Servicios/nuevo',$data);
             $this->load->view('Layouts/footer');
         }else{
             redirect(base_url());
@@ -50,11 +49,11 @@ class Servicios extends CI_Controller{
                     'estado' => $this->input->post('estado')
                 );
                 $this->DataModel->insertaServicio($datos);
-                redirect(base_url()+"Servicios/nuevo");
+                redirect(base_url()."Servicios/nuevo");
         }else{
             redirect(base_url());
         }
-    }
+    } 
     
     public function actualiza($servicio_id){
         $session=$this->session->userdata('logged');
@@ -63,10 +62,10 @@ class Servicios extends CI_Controller{
         //sesion y permisos
         if($session==true && $permiso != 0){
             $idCargo = $this->input->post('cargoId');
-            $info['MyNombre']=$this->session->userdata('username');
+            $data['tipoPrecio']= $this->DataModel->listaTipoPrecio();
             $data['servicio']=$this->DataModel->buscaServicioById($servicio_id);
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Servicios/actualiza',$data);
             $this->load->view('Layouts/footer');
         }else{
@@ -88,7 +87,7 @@ class Servicios extends CI_Controller{
                     'estado' => $this->input->post('estado')
                 );
             $this->DataModel->actualizaServicio($idServicio,$datos);
-            redirect(base_url()+"Servicios");
+            redirect(base_url()."Servicios");
         }else{
             redirect(base_url());
         }

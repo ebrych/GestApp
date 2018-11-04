@@ -2,10 +2,13 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Clientes extends CI_Controller{
 
+  public $controlador='6';
+
+
   public function index(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -21,7 +24,7 @@ class Clientes extends CI_Controller{
   public function nuevo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -36,7 +39,7 @@ class Clientes extends CI_Controller{
   public function agregaCliente(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $datos=array(
@@ -53,7 +56,7 @@ class Clientes extends CI_Controller{
   public function actualiza($cliente_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -69,7 +72,7 @@ class Clientes extends CI_Controller{
   public function actualizaDato(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
                 $idCliente=$this->input->post('idCliente');
@@ -78,9 +81,7 @@ class Clientes extends CI_Controller{
                     'email' => $this->input->post('email'),
                     'telefono' => $this->input->post('telefono'),
                 );
-                $data['datos']=$this->DataModel->actualizaClienteById($idCliente,$datos);
-                
-            $this->DataModel->actualizaInsumo($idInsumo,$datos);
+                $this->DataModel->actualizaClienteById($idCliente,$datos);
             redirect(base_url()."Clientes");
         }else{
             redirect(base_url());

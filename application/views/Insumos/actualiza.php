@@ -5,11 +5,11 @@
   <p>&nbsp;</p>
   
   <form action="<?php echo base_url() ?>Insumos/actualizaDato" method="post">
-              <input type="text" class="form-control" name="idInsumo" value="<?php echo insumo[0]->id ?>"   placeholder="Nombres del Insumo" required>
+              <input type="text" class="form-control" name="idInsumo" value="<?php echo $insumo[0]->id ?>" style="display:none"   placeholder="Nombres del Insumo" required>
               <label>Nombre:</label>
-              <input type="text" class="form-control" name="nombre" value="<?php echo insumo[0]->nombre ?>"  placeholder="Nombres del Insumo" required>
+              <input type="text" class="form-control" name="nombre" value="<?php echo $insumo[0]->nombre ?>"  placeholder="Nombres del Insumo" required>
               <label>Descripción:</label>
-              <input type="text" class="form-control" name="descripcion" value="<?php echo insumo[0]->descripcion ?>" placeholder="Descripcion" required>
+              <input type="text" class="form-control" name="descripcion" value="<?php echo $insumo[0]->descripcion ?>" placeholder="Descripcion" required>
               <label>Estado:</label>
               <select class="form-control" name="estado" required>
               <?php 

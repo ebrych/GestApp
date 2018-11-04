@@ -9,7 +9,7 @@ class Cargos extends CI_Controller {
     public function index(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -26,7 +26,7 @@ class Cargos extends CI_Controller {
     public function nuevo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -42,7 +42,7 @@ class Cargos extends CI_Controller {
     public function agregarCargo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $datos=array(
@@ -59,7 +59,7 @@ class Cargos extends CI_Controller {
     public function actualiza($cargo_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -76,7 +76,7 @@ class Cargos extends CI_Controller {
     public function actualizaDato(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $idCargo=$this->input->post('idCargo');
@@ -94,7 +94,7 @@ class Cargos extends CI_Controller {
     public function permisos($cargo_id,$cargo_nombre){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -114,30 +114,31 @@ class Cargos extends CI_Controller {
     public function agregarPermiso(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $crgo=$this->input->post('cargo');
             $prms=$this->input->post('permiso');
+            $nmbCrg=$this->input->post('nombreCargo');
             $data=array(
                         'idCargo' => $crgo,
                         'idPermiso' => $prms
                     );
             $this->DataModel->insertaPermiso($data);
-            redirect(base_url()."Cargos/permisos".$cargo_id);
+            redirect(base_url()."Cargos/permisos/".$crgo."/".$nmbCrg);
         }else{
             redirect(base_url());
         }
     }
     
-    public function eliminaPermiso($cargo_id,$permiso_id){
+    public function eliminaPermiso($cargo_id,$permiso_id,$cargo_nombre){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
              $this->DataModel->eliminaPermiso($cargo_id,$permiso_id);
-            redirect(base_url()."Cargos/permisos/".$cargo_id);
+            redirect(base_url()."Cargos/permisos/".$cargo_id."/".$cargo_nombre);
         }else{
             redirect(base_url());
         }

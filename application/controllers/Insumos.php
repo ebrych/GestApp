@@ -2,10 +2,12 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Insumos extends CI_Controller {
 
+    public $controlador='2';
+
   public function index(){        
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -22,7 +24,7 @@ class Insumos extends CI_Controller {
   public function nuevo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $info['MyNombre']=$this->session->userdata('username');
@@ -38,7 +40,7 @@ class Insumos extends CI_Controller {
   public function agregarInsumo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $datos=array(
@@ -53,17 +55,15 @@ class Insumos extends CI_Controller {
         }
   }
   
-  public function actualiza(){
+  public function actualiza($insumo_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $idInsumo = $this->input->post('insumoId');;
-            $info['MyNombre']=$this->session->userdata('username');
-            $data['insumo']=$this->DataModel->buscaInsumo($idInsumo);
+            $data['insumo']=$this->DataModel->buscaInsumo($insumo_id);
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Insumos/actualiza',$data);
             $this->load->view('Layouts/footer');
         }else{
@@ -74,7 +74,7 @@ class Insumos extends CI_Controller {
   public function actualizaDato(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $idInsumo=$this->input->post('idInsumo');
