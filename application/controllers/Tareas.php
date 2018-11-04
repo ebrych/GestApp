@@ -4,17 +4,20 @@ class Tareas extends CI_Controller{
 
     public $controlador='7';
     
-    public function index(){
+    public function index($fecha=null){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $info['MyNombre']=$this->session->userdata('username');
-            $date=$this->input->post('date');
-            $data['tareas']= $this->DataModel->listarTareas($date);
+            $fecha=$this->input->get('dateData');
+            if($fecha==null){
+                $fecha=date("Y-m-d");
+            }
+            $data['tareas']= $this->DataModel->listarTareas($fecha);
+            $data['hoy']=$fecha;
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Tareas/index',$data);
             $this->load->view('Layouts/footer');	
         }else{
@@ -25,12 +28,11 @@ class Tareas extends CI_Controller{
     public function nuevo(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $info['MyNombre']=$this->session->userdata('username');
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Tareas/nuevo');
             $this->load->view('Layouts/footer');
         }else{
@@ -41,7 +43,7 @@ class Tareas extends CI_Controller{
     public function agregarTarea(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $datos=array(
@@ -61,14 +63,13 @@ class Tareas extends CI_Controller{
     public function asignaServicio($tarea_id){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $info['MyNombre']=$this->session->userdata('username');
             $data['misServicio']=$this->DataModel->buscaServiciosTareaById($tarea_id);
             $data['servicios']=$this->DataModel->selectListServicio();
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Tareas/Servicio');
             $this->load->view('Layouts/footer');
         }else{

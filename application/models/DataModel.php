@@ -734,6 +734,60 @@ class DataModel extends CI_Model
         return $this->db->update('TB_WEB_CONTACTO',$datos);
     }
 
+    //Tareas
+    public function listarTareas($date){
+        $query = $this->db->query("SELECT trs.id,lcl.nombres as 'local',cl.nombres as 'cliente',
+                                    trs.fecha,
+                                    (CASE 
+                                        WHEN trs.estado = 1 THEN 'Ingresada' 
+                                        WHEN trs.estado = 2 THEN 'Finalizada'
+                                        ELSE'Cancelado'
+                                    END) AS 'estado' 
+                                    FROM TB_TAREAS trs 
+                                    INNER JOIN TB_LOCALES lcl on trs.idLocal=lcl.id 
+                                    INNER JOIN TB_CLIENTES cl on trs.idCliente=cl.id
+                                    WHERE trs.fecha='$date' ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        } 
+    }
+    public function insertaTarea($datos){
+        $query = $this->db->insert('TB_TAREAS',$datos);
+        if ($this->db->affected_rows() > 0)
+        {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    public function buscaestadoTarea($idTarea){
+        $estado=0;
+        $query = $this->db->query("SELECT estado FROM TB_TAREAS WHERE id='$idTarea' ");
+        if($query->num_rows() == 0){
+            return null;
+        }else{
+            $estado= $query->result();
+            return $estado[0]->estado;
+        } 
+    }
+    public function updateTarea($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('TB_TAREAS',$datos);
+    }
+    public function buscaTarea($fecha,$hora,$local,$cliente){
+        $estado=0;
+        $query = $this->db->query("SELECT id as 'result' FROM TB_TAREAS WHERE idLocal='$local' AND idCliente='$cliente' AND fecha='$fecha' AND hora='$hora'  ");
+        if($query->num_rows() == 0){
+            return null;
+        }else{
+            $estado= $query->result();
+            return $estado[0]->result;
+        } 
+    }
+
+
     //generarTextos
     public function generatePass($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
