@@ -30,6 +30,11 @@ class DataModel extends CI_Model
             return $data;
         } 
     }
+    public function buscaUserByMail($email){
+        $query = $this->db->query("SELECT count(*) as 'result' FROM TB_USUARIOS WHERE email='$email' ");
+        $rslt = $query->result();
+        return $rslt[0]->result;
+    }
     public function veryfyPermission($cargo,$controlador){
         $query = $this->db->query("SELECT COUNT(*) FROM TB_CARGO_PERMISO WHERE idCargo='$cargo' AND idPermiso='$controlador' ");
         return $query->result();
