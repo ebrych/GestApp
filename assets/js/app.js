@@ -3,6 +3,11 @@
 ║{7=+A(L8Wc)pnsQ4:startJs ║ 
 ╚═════════════════════════╝
 */
+//====================================Login
+function modalOlvideCon(){
+    $('#modalOlvPs').modal('show');
+}
+
 //====================================Cargos
 var cargosOption = {
     valueNames: [ 'nombre', 'estado' ],
