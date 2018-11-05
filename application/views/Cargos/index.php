@@ -1,5 +1,5 @@
 <br/>
-<div class="container">
+<div class="container" id="cargos-list">
   <h1>Cargos</h1> 
     <a href="<?php echo base_url() ?>Cargos/nuevo" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Cargo</a>
     <p>&nbsp;</p>
@@ -8,18 +8,20 @@
         <?php
             foreach ($cargos as $row){
         ?>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+       <div class="list">
+          <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="row">
                 <div class="col-8">
                     <h5 class="nombre" style="font-weight: bold;font-size:25px"> <?php echo $row->descripcion ?></h5>
-                    <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?>
+                    <i class="fab fa-font-awesome-flag estado"></i> <?php echo $row->estado ?>
                 </div>
                 <div class="col-4" align="right">
                     <i class="fas fa-pen" onclick="hrefToAct(1,<?php echo $row->id ?>)" style="font-size: 20px;color:#007bff;"></i>
                     <i class="fas fa-key" onclick="hrefToAct(2,<?php echo $row->id ?>,'<?php echo $row->descripcion ?>')" style="font-size: 20px;color:#007bff;"></i>
                 </div>
             </div>
-        </a>
+          </a>
+        </div>
         <?php 
             } 
         ?>
