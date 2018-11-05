@@ -82,31 +82,6 @@ function hrefToAct(controlador,id,fecha,nombre){
 }
 </script>
 
-<!--
-<div class="list-group">
-        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{data.cliente}}</h5>
-            <div align="right">
-            <small>
-              <i class="fas fa-users" (click)="abrirModalTrabajadores(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              &nbsp;
-              <i class="fas fa-hands-helping" (click)="abrirModalServicio(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              &nbsp;
-              <i class="far fa-money-bill-alt" (click)="abrirModalPago(data.id)"  style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              &nbsp;
-              <i class="fas fa-receipt" (click)="abrirModalRecibos(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              <br/>
-              <i class="fas fa-ban" (click)="abrirModalCancela(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-            </small>
-            </div>
-          </div>
-          <p class="mb-1"><i class="fas fa-warehouse"></i> {{data.local}}</p>
-          <p class="mb-1"><i class="fas fa-calendar-alt"></i> {{data.fecha}}</p>
-          <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
-        </div>
-      </div>
-
 
 
       
