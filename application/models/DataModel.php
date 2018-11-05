@@ -388,6 +388,7 @@ class DataModel extends CI_Model
         }
     }
     public function montoTotalTarea($idTarea){
+        //$rslt=[];
         $total=0;
         $subTotal=0;
         $igv=0.18;
@@ -400,10 +401,11 @@ class DataModel extends CI_Model
         $igv=($total * $igv);
         $subTotal=($total - $igv);
         $data=array(
-            'total'=>$total,
-            'subtotal'=>$subTotal,
+            'total'=> number_format($total,2),
+            'subtotal'=> number_format($subTotal,2),
             'igv'=>number_format($igv,2)
         );
+        //array_push($rslt,$data);
         return $data;
     }
     public function agregaTrabajadorToTarea($datos){
@@ -530,6 +532,16 @@ class DataModel extends CI_Model
         return $query->result();
         } 
     }
+    //usuario
+    public function listarTrabajadores($idLocal){
+        $query = $this->db->query("SELECT usr.id, usr.nombres  FROM TB_USUARIOS usr WHERE usr.idLocal='$idLocal' AND usr.id > 1  ");
+        if($query->num_rows() == 0){
+        return null;
+        }else{
+        return $query->result();
+        }  
+    }
+
     //asistencia
     public function listarAsistenciadelDia($fecha){
         $query = $this->db->query(" SELECT us.nombres,cr.descripcion as 'cargo',

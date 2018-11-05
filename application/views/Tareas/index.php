@@ -23,30 +23,64 @@
 
 
     <div class="list-group">
-        <?php
-            foreach ($tareas as $row){
+    <p>&nbsp;</p>
+    <?php 
+    if($tareas==null){
         ?>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="row">
+                <div class="col-12" align="center">
+                    <h5 class="nombre" style="font-weight: bold;font-size:25px"> No hay tareas para el dia de hoy</h5>                    
+                </div>
+            </div>
+        <?php
+    }else{
+        foreach ($tareas as $row){
+        ?>
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="row">
                 <div class="col-8">
                     <h5 class="nombre" style="font-weight: bold;font-size:25px"> <?php echo $row->cliente ?></h5>
-                    <i class="fas fa-warehouse"></i> <?php echo $row->email ?>  &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <i class="fas fa-calendar-alt"></i> <?php echo $row->telefono ?> <br/>
-                    <i class="fab fa-font-awesome-flag"></i> <?php echo $row->telefono ?>
+                    <i class="fas fa-warehouse"></i> <?php echo $row->local ?>  &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <i class="fas fa-calendar-alt"></i> <?php echo $row->fecha ?> <br/>
+                    <i class="fab fa-font-awesome-flag"></i> <?php echo $row->estado ?>
+
+   
                     
                 </div>
                 <div class="col-4" align="right">
-                <i class="fas fa-pen" onclick="hrefToAct(<?php echo $row->id ?>)" style="font-size: 20px;color:#007bff;"></i>
+                <i class="fas fa-hands-helping" onclick="hrefToAct('1',<?php echo $row->id ?>,'<?php echo $row->fecha ?>','<?php echo $row->cliente ?>')" style="font-size: 20px;color:#007bff;"></i>&nbsp;
+                    <i class="fas fa-users" onclick="hrefToAct('2',<?php echo $row->id ?>,'<?php echo $row->fecha ?>','<?php echo $row->cliente ?>')" style="font-size: 20px;color:#007bff;"></i>&nbsp;
+                    <i class="far fa-money-bill-alt" onclick="hrefToAct('3',<?php echo $row->id ?>,'<?php echo $row->fecha ?>','none')" style="font-size: 20px;color:#007bff;"></i>&nbsp;
+                    <i class="fas fa-receipt" onclick="hrefToAct('4',<?php echo $row->id ?>,'<?php echo $row->fecha ?>','none')" style="font-size: 20px;color:#007bff;"></i>&nbsp;
+                    <i class="fas fa-ban" onclick="hrefToAct('5',<?php echo $row->id ?>,'<?php echo $row->fecha ?>','none')" style="font-size: 20px;color:#007bff;"></i>&nbsp;
                 </div>
             </div>
-        </a>
-        <?php 
-            } 
-        ?>  
+            </a>
+        <?php
+        } 
+    } 
+    ?>
     </div>
 
 
 </div>
+
+
+<script>
+function hrefToAct(controlador,id,fecha,nombre){
+    if(controlador==1){
+        location.href="<?php echo base_url() ?>Tareas/asignaServicio/"+id+"/"+fecha+"/"+nombre;
+    }else if(controlador==2){
+        location.href="<?php echo base_url() ?>Tareas/asignaPersonalTarea/"+id+"/"+fecha+"/"+nombre;
+    }else if(controlador==3){
+        location.href="<?php echo base_url() ?>Tareas/finalizaTarea/"+id+"/"+fecha;
+    }else if (controlador==4){
+        location.href="<?php echo base_url() ?>Tareas/comprobante/"+id+"/"+fecha;
+    }else if (controlador==5){
+        location.href="<?php echo base_url() ?>Tareas/cancelaTarea/"+id+"/"+fecha;
+    }
+}
+</script>
 
 <!--
 <div class="list-group">
@@ -72,3 +106,7 @@
           <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
         </div>
       </div>
+
+
+
+      
