@@ -15,6 +15,7 @@ class ReporteLocal extends CI_Controller{
                 $fecha=date("Y-m-d");
             }
             $dataFecha=EXPLODE("-",$fecha);
+            $data['hoy']=$fecha;
             $data['locales']= $this->DataModel->listaLocalesReporte($dataFecha[1]);    
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu');
