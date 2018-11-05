@@ -7,15 +7,14 @@ class ReporteLocal extends CI_Controller{
     public function index(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
-        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
             $hoy=$this->input->post('date');
             $dataFecha=EXPLODE("-",$hoy);
-            $data['locales']= $this->DataModel->listaLocalesReporte($dataFecha[1]);  
-            $info['MyNombre']=$this->session->userdata('username');    
+            $data['locales']= $this->DataModel->listaLocalesReporte($dataFecha[1]);    
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('ReporteLocal/index',$data);
             $this->load->view('Layouts/footer');	
         }else{
