@@ -5,6 +5,7 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{	
+		$this->session->sess_destroy();
 		$this->load->view('Layouts/headerLgn');
 		$this->load->view('Login/index');
 		$this->load->view('Layouts/footer');
@@ -27,7 +28,7 @@ class Welcome extends CI_Controller {
 		$token=$this->session->userdata('token');
 		$this->DataModel->logout($idUsr,$token);
 		$this->session->sess_destroy();
-		redirect('http://'.base_url());
+		redirect(base_url());
 	}
 
 	public function panel(){
@@ -41,8 +42,17 @@ class Welcome extends CI_Controller {
 			$this->load->view('Panel/index',$data);
 			$this->load->view('Layouts/footer');	
 		}else{
-			redirect('http://'.base_url());
+			redirect(base_url());
 		}
+	}
+	
+	public function recuperaPass(){
+		$idUsr=$this->session->userdata('id');
+		$token=$this->session->userdata('token');
+		$correo=$this->input->post('mail');
+		$existe=$this->DataModel->buscaUserByMail($correo);
+		
+		redirect(base_url());
 	}
 
 }
