@@ -21,5 +21,35 @@ class Marcaciones extends CI_Controller{
             redirect(base_url());
         }
     }
+    
+    public function agregarMarcacion($personal_id){
+        $session=$this->session->userdata('logged');
+        $cargo=$this->session->userdata('cargo');
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador)
+        //sesion y permisos
+        if($session==true && $permiso != 0){
+            $hoy=date("Y-m-d");
+            $busca=$this->DataModel->buscaAsistencia($personal_id,$hoy);
+                if($busca==0){
+                        //agrega asistencia
+                        $data=array(
+                            'idUsuario'=> $idUser,
+                            'fecha'=> $hoy,
+                            'entrada'=>date("H:i:s")
+                        );
+                        $this->DataModel->registrarAsistencia($data);
+                }else{
+                        //update asistencia
+                        $data=array(
+                            'salida' => date("H:i:s")
+                        );
+                        //$salida=date("H:i:s");
+                        $this->DataModel->actualizaAsistencia($idUser,$hoy,$data);
+                }
+                redirect(base_url()."Marcaciones");
+        }else{
+            redirect(base_url());
+        }
+    }
 
 }
