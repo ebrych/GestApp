@@ -26,7 +26,7 @@ class Web extends CI_Controller{
         //sesion y permisos
         if($session==true && $permiso != 0){
             $data['informacion']= $this->DataModel->infoWeb();
-            $data['contacto']=contactoWeb(1);
+            $data['contacto']=$this->DataModel->contactoWeb(1);
             $this->load->view('Layouts/header');
             $this->load->view('Layouts/menu');
             $this->load->view('Web/index',$data);
