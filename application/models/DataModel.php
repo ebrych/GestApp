@@ -15,13 +15,13 @@ class DataModel extends CI_Model
         }else{
             //genera tokenDinamico
             $token=$this->generatePass(20);
-        
             //inserta tokenDinamico y recupera info sesion Json
             foreach ($query->result() as $row){
                 $this->db->query("update TB_USUARIOS set dinamico='$token' where id='$row->id' ");
                 $data = array(
                   'id' => $row->id,
                   'username'  => $row->nombres,
+                  'correo' => $row->email,
                   'token' => $token,
                   'cargo' => $row->idCargo,
                   'logged' => true
