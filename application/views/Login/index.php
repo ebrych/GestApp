@@ -28,12 +28,14 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-          <form action="<?php echo base_url() ?>Welcome/recuperaPass" method="post">
+      <div class="modal-body" align="center">
+          <div style="width:90%">
+              <form action="<?php echo base_url() ?>Welcome/recuperaPass" method="post">
               <label>Ingrese su correo electrónico</label>
               <input type="email" class="form-control" name="mail" placeholder="Email" required>
               <button type="submit" class="btn btn-primary" class="100%">Submit</button>
-          </form>
+              </form>
+          </div>
       </div>
     </div>
   </div>
