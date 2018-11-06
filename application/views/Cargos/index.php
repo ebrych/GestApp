@@ -5,10 +5,10 @@
     <p>&nbsp;</p>
   
     <div class="list-group">
+      <div class="list">
         <?php
             foreach ($cargos as $row){
         ?>
-       <div class="list">
           <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="row">
                 <div class="col-8">
@@ -21,11 +21,11 @@
                 </div>
             </div>
           </a>
-        </div>
+        
         <?php 
             } 
         ?>
-        
+        </div>
     </div>
   
 </div>
