@@ -20,11 +20,10 @@
                     <i class="fas fa-key" onclick="hrefToAct(2,<?php echo $row->id ?>,'<?php echo $row->descripcion ?>')" style="font-size: 20px;color:#007bff;"></i>
                 </div>
             </div>
-          </a>
-        
-        <?php 
-            } 
-        ?>
+          </a>  
+          <?php 
+              } 
+          ?>
         </div>
     </div>
   
