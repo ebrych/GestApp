@@ -47,11 +47,15 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function recuperaPass(){
-		$idUsr=$this->session->userdata('id');
-		$token=$this->session->userdata('token');
+		$this->load->model('MesajesModel');
 		$correo=$this->input->post('mail');
 		$existe=$this->DataModel->buscaUserByMail($correo);
-		
+		if($existe!=0){
+		   $pws=$this->DataModel->getContrasena($correo);
+		   $subject="Recupera Contraseña";
+		   $mensaje="<h1>Solicitud de recuperación de contraseña</h1><br/>la información para su logueo a la página: ".base_url()." es:<br/>Usuario:".$correo." <br/>Contraseña: ".$pws." ";
+		   $this->MesajesModel->enviarMensaje($correo,$subject,$mensaje);
+		}
 		redirect(base_url());
 	}
 
