@@ -20,7 +20,7 @@ class Panel extends CI_Controller {
 		if($session==true && $permiso != 0){
 		    $data=array(
 		    	'nombre'=>$this->session->userdata('username'),
-				'mail' =>$this->session->userdata('correo')
+			'mail' =>$this->session->userdata('correo')
 		    );
 		    $this->load->view('Layouts/header');
 		    $this->load->view('Layouts/menu');
@@ -51,6 +51,7 @@ class Panel extends CI_Controller {
 			   'pws'=>$newPass
 		    	);
 		    }
+		    $this->DataModel->actualizaDatoAccount($id,$data);
 		    //this para actualizar
 		    redirect(base_url()."Panel");
 		}else{
