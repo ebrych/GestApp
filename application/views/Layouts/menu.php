@@ -12,7 +12,7 @@
             <a class="nav-link" href="<?php echo base_url() ?>Welcome/Panel"><i class="fas fa-columns"></i> Panel Principal</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"> <i class="fas fa-cog"></i> Opciones</a>
+        <a class="nav-link" href="Panel/cuenta"> <i class="fas fa-cog"></i> Opciones</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#" (click)="logout()"> <i class="fas fa-sign-out-alt"></i> Salir </a>
