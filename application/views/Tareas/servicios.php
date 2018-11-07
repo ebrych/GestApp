@@ -11,7 +11,7 @@
         <label style="color:#bdc3c7">Fecha</label>
         <input type="date" class="form-control" name="fecha"   value="<?php echo $fecha ?>" readonly />
         <label style="color:#bdc3c7">Servicios</label>
-        <select class="form-control" name="idservicio" required>
+        <select class="selectpicker" style="width:100%" name="idservicio" required>
             <?php
             foreach ($servicios as $row) {
             ?>
