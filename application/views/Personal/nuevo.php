@@ -12,7 +12,7 @@
               <label>Telefono</label>
               <input type="text" class="form-control" name="telefono" placeholder="Teléfono" >
               <label>Local</label>
-              <select class="form-control" name="local"  required >
+              <select class="selectpicker" style="width:100%" name="local"  required >
                   <?php
                     foreach ($locales as $row){
                   ?>
@@ -22,7 +22,7 @@
                   ?>
               </select>
               <label>Cargo</label>
-              <select class="form-control" name="cargo"  required >
+              <select class="selectpicker" style="width:100%" name="cargo"  required >
                   <?php
                     foreach ($cargos as $row){
                   ?>
