@@ -1,5 +1,5 @@
 <br/>
-<div class="container">
+<div class="container" id="list">
   <h1>Tareas del día</h1> 
     <a href="<?php echo base_url() ?>Tareas/nuevo" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Tarea</a>
     <p>&nbsp;</p>
@@ -16,7 +16,7 @@
         </div>
         <div class="col-sm"></div> 
         <div class="col-sm" align="right">
-          filtros
+          <input type="text" class="form-control search" placeholder="Filtrar">
         </div>
     </div>
 
@@ -24,6 +24,7 @@
 
     <div class="list-group">
     <p>&nbsp;</p>
+    <div class="list">
     <?php 
     if($tareas==null){
         ?>
@@ -60,6 +61,8 @@
         } 
     } 
     ?>
+       <div align="right"><ul class="pagination"></ul></div>
+       </div>
     </div>
 
 
@@ -80,6 +83,13 @@ function hrefToAct(controlador,id,fecha,nombre){
         location.href="<?php echo base_url() ?>Tareas/cancelaTarea/"+id+"/"+fecha;
     }
 }
+  //listJS
+  var options = {
+  valueNames: [ 'nombre' ],
+  page: 4,
+  pagination: true
+  };
+  var listJs = new List('list', options);
 </script>
 
 
