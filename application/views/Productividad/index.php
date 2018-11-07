@@ -1,5 +1,5 @@
 <br/>
-<div class="container">
+<div class="container" id="list">
   <h1>Reporte de Productividad</h1>
   <div class="row">
         <div class="col-sm">
@@ -14,10 +14,11 @@
         </div>
         <div class="col-sm"></div> 
         <div class="col-sm" align="right">
-          filtros
+          <input type="text" class="form-control search" placeholder="Filtrar">
         </div>
   </div>
   <div class="list-group">
+        <div class="list">
         <?php
             foreach ($personal as $row){
         ?>
@@ -37,7 +38,8 @@
         <?php 
             } 
         ?>
-        
+          <div align="right"><ul class="pagination"></ul></div>
+        </div>
     </div>
   
 </div>
