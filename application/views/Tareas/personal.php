@@ -10,7 +10,7 @@
         <label style="color:#bdc3c7">Fecha</label>
         <input type="date" class="form-control" name="fecha"   value="<?php echo $fecha ?>" readonly />
         <label style="color:#bdc3c7">Personal</label>
-        <select class="form-control" name="idpersonal" required>
+        <select class="selectpicker" style="width:100%" name="idpersonal" required>
             <?php
             foreach ($personal as $row) {
             ?>
