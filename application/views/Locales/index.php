@@ -37,6 +37,7 @@
         <?php 
             } 
         ?>
+        <div align="right"><ul class="pagination"></ul></div>
         </div>
     </div>
   
