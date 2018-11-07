@@ -1,10 +1,11 @@
 <br/>
-<div class="container">
+<div class="container" id="list">
   <h1>Clientes</h1> 
     <a href="<?php echo base_url() ?>Clientes/nuevo" style="font-size:20px;color:#007bff;"><i class="fas fa-plus-circle"></i> Agregar Cliente</a>
     <p>&nbsp;</p>
     
     <div class="list-group">
+        <div class="list">
         <?php
             foreach ($clientes as $row){
         ?>
@@ -22,7 +23,8 @@
         </a>
         <?php 
             } 
-        ?>  
+        ?>
+        </div>
     </div>
     
     
@@ -33,4 +35,11 @@
   function hrefToAct(id){
     location.href="<?php echo base_url() ?>Clientes/actualiza/"+id;
   }
+  //listJS
+  var options = {
+  valueNames: [ 'nombre' ],
+  page: 4,
+  pagination: true
+  };
+  var listJs = new List('list', options);
 </script>
