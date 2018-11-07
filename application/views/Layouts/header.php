@@ -17,5 +17,10 @@
     <link rel="stylesheet" href="http://localhost/GestApp/assets/css/bootstrap-select.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Sarala" rel="stylesheet">
+    <script src="http://localhost/GestApp/assets/js/jquery.min.js" ></script>
+    <script src="http://localhost/GestApp/assets/js/bootstrap.min.js" ></script>
+    <script src="http://localhost/GestApp/assets/js/list.min.js"></script>
+    <script src="http://localhost/GestApp/assets/js/bootstrap-select.min.js"></script>
+
   </head>
   <body style="font-family: 'Sarala', sans-serif;background-color:#f5f5f5">

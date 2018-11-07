@@ -19,8 +19,8 @@ class Panel extends CI_Controller {
 		//sesion y permisos
 		if($session==true && $permiso != 0){
 		    $data=array(
-		    	'nombre'=>$this->session->userdata('username');
-			'mail' =>$this->session->userdata('correo');
+		    	'nombre'=>$this->session->userdata('username'),
+				'mail' =>$this->session->userdata('correo')
 		    );
 		    $this->load->view('Layouts/header');
 		    $this->load->view('Layouts/menu');
