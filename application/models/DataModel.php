@@ -40,6 +40,10 @@ class DataModel extends CI_Model
         $rslt = $query->result();
         return $rslt[0]->result;
     }
+    public function actualizaDatoAccount($id,$datos){
+        $this->db->where('id',$id);
+        return $this->db->update('FROM TB_USUARIOS',$datos);
+    }
     public function veryfyPermission($cargo,$controlador){
         $query = $this->db->query("SELECT COUNT(*) FROM TB_CARGO_PERMISO WHERE idCargo='$cargo' AND idPermiso='$controlador' ");
         return $query->result();
