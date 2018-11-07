@@ -58,5 +58,5 @@
   page: 4,
   pagination: true
   };
-  var userList = new List('list', options);
+  var listJs = new List('list', options);
 </script>
