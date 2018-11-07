@@ -8,7 +8,7 @@
 
     <form action="<?php echo base_url() ?>Tareas/agregarTarea" method="post">
           <label>Cliente</label>
-            <select class="form-control" name="cliente"  required >
+            <select class="selectpicker" style="width:100%" name="cliente"  required >
                 <?php
                     foreach($clientes as $row){
                 ?>
