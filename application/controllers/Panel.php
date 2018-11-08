@@ -20,7 +20,7 @@ class Panel extends CI_Controller {
 		if($session==true && $permiso != 0){
 		    $data=array(
 		    	'nombre'=>$this->session->userdata('username'),
-			'mail' =>$this->session->userdata('correo')
+				'mail' =>$this->session->userdata('correo')
 		    );
 		    $this->load->view('Layouts/header');
 		    $this->load->view('Layouts/menu');
@@ -41,13 +41,13 @@ class Panel extends CI_Controller {
 		    $newPass=$this->input->post('pass');
 		    if($newPass==""){
 			$data=array(
-			   'nombres'=>$this->input->post();
-			   'email'=>$this->input->post();
+			   'nombres'=> $this->input->post(''),
+			   'email'=> $this->input->post(''),
 		    	);
 		    }else{
 		    	$data=array(
-			   'nombres'=>$this->input->post();
-			   'email'=>$this->input->post();
+			   'nombres'=>$this->input->post(),
+			   'email'=>$this->input->post(),
 			   'pws'=>$newPass
 		    	);
 		    }

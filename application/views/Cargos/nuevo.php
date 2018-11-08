@@ -1,5 +1,5 @@
 
-<p>&nbsp;</p>
+<br/>
 
 <div class="container">
   <h1>Agregar Cargo</h1> 

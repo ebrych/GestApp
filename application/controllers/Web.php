@@ -35,6 +35,20 @@ class Web extends CI_Controller{
             redirect(base_url());
         }
      }
+     public function nuevaEntrada(){
+        $session=$this->session->userdata('logged');
+        $cargo=$this->session->userdata('cargo');
+        $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
+        //sesion y permisos
+        if($session==true && $permiso != 0){
+            $this->load->view('Layouts/header');
+            $this->load->view('Layouts/menu');
+            $this->load->view('Web/entrada');
+            $this->load->view('Layouts/footer');	
+        }else{
+            redirect(base_url());
+        }
+     }
      public function agregarInformacion(){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
@@ -47,7 +61,7 @@ class Web extends CI_Controller{
              'orden ' =>  $this->input->post('orden')
            );
            $this->DataModel->agregarInfoWeb($datos);
-           redirect(base_url()."Web/informacion");
+           redirect(base_url()."Web");
         }else{
             redirect(base_url());
         }
@@ -59,7 +73,7 @@ class Web extends CI_Controller{
         //sesion y permisos
         if($session==true && $permiso != 0){
            $this->DataModel->deleteInfoWeb($info_id);
-           redirect(base_url()."Web/informacion");
+           redirect(base_url()."Web");
         }else{
             redirect(base_url());
         }
