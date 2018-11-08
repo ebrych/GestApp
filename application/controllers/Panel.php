@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Panel extends CI_Controller {
 
+	public $controlador='13';
+
 	public function Permisos()
 	{
 		$id = $this->input->post('id');
@@ -13,15 +15,16 @@ class Panel extends CI_Controller {
 	}
 	
 	public function cuenta(){
-	        $session=$this->session->userdata('logged');
+		$session=$this->session->userdata('logged');
 		$cargo=$this->session->userdata('cargo');
 		$permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
 		//sesion y permisos
 		if($session==true && $permiso != 0){
-		    $data=array(
+		    $datos=array(
 		    	'nombre'=>$this->session->userdata('username'),
 				'mail' =>$this->session->userdata('correo')
-		    );
+			);
+			$data['dtos']=$datos;
 		    $this->load->view('Layouts/header');
 		    $this->load->view('Layouts/menu');
 		    $this->load->view('Panel/cuenta',$data);

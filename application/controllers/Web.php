@@ -73,7 +73,7 @@ class Web extends CI_Controller{
         //sesion y permisos
         if($session==true && $permiso != 0){
            $this->DataModel->deleteInfoWeb($info_id);
-           redirect(base_url()."Web");
+           redirect(base_url()."Web/informacion");
         }else{
             redirect(base_url());
         }

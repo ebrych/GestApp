@@ -5,13 +5,14 @@
   <p>&nbsp;</p>
   <form action="<?php echo base_url() ?>Panel/actualizaDato" method="post">
   <label>Nombre</label>
-  <input class="form-control" name="nombres" value="<?php echo $count["nombre"] ?>" />
+  <input class="form-control" name="nombres" value="<?php echo $dtos["nombre"]; ?>" />
   <label>Correo Electrónico</label>
-  <input class="form-control" name="mail" value="<?php echo $count["mail"] ?>" />
+  <input class="form-control" name="mail" value="<?php echo $dtos["mail"] ?>" />
   <label>Nueva Contraseña</label>
   <input class="form-control" name="pass" />
   <label>Repita la Contraseña</label>
   <input class="form-control" name="passRep" />
+  <br/>
   <button class="btn btn-primary btn-block" type="submit">Guardar</button>
   </form>
 
