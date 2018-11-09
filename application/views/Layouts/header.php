@@ -21,6 +21,7 @@
     <script src="http://localhost/GestApp/assets/js/bootstrap.min.js" ></script>
     <script src="http://localhost/GestApp/assets/js/list.min.js"></script>
     <script src="http://localhost/GestApp/assets/js/bootstrap-select.min.js"></script>
+    
 
   </head>
   <body style="font-family: 'Sarala', sans-serif;background-color:#f5f5f5">

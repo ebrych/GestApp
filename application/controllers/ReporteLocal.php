@@ -27,6 +27,6 @@ class ReporteLocal extends CI_Controller{
     }
     
     
-    
+     
     
 }

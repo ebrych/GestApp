@@ -1,6 +1,7 @@
 <br/>
 <div class="container" id="list">
-  <h1>Reservas</h1> 
+  <h1>Reservas</h1>
+  <a href="<?php echo base_url() ?>Welcome/Panel" style="font-size:20px;color:#007bff;"><i class="fas fa-arrow-left"></i> Regresar </a> 
   <p>&nbsp;</p>
    <div class="row">
         <div class="col col-lg-6" style="padding:0px"></div>

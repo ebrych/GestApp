@@ -1,6 +1,9 @@
 <br/>
 <div class="container" id="list">
 <h1>Personal</h1>
+<a href="<?php echo base_url() ?>Welcome/Panel" style="font-size:20px;color:#007bff;"><i class="fas fa-arrow-left"></i> Regresar </a> 
+<p>&nbsp;</p>
+
     <div class="row">
         <div class="col col-lg-6" style="padding:0px"></div>
         <div class="col col-lg-6" style="padding:0px">
@@ -16,16 +19,17 @@
         <div class="list">
         <?php
             foreach ($personal as $row){
+            $id=$row["id"];
         ?>
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="row">
                 <div class="col-8">
-                    <h5 class="nombre" style="font-weight: bold;font-size:25px"> <?php echo $row->nombres ?></h5>
-                    <i class="fas fa-address-card"></i> <?php echo $row->cargo ?> &nbsp;&nbsp;|&nbsp;&nbsp;
-                    <i class="fas fa-user-check"></i> <?php echo $row->reporte ?>
+                    <h5 class="nombre" style="font-weight: bold;font-size:25px"> <?php echo $row["nombres"] ?></h5>
+                    <i class="fas fa-address-card"></i> <?php echo $row["cargo"] ?> &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <i class="fas fa-user-check"></i> <?php echo $row["reporte"] ?>
                 </div>
                 <div class="col-4" align="right">
-                    <i class="fas fa-user-check" onclick="hrefToAct('<?php echo $row->id ?>')" style="font-size: 20px;color:#007bff;"></i>
+                    <i class="fas fa-user-check" onclick="hrefToAct('<?php echo $id ?>')" style="font-size: 20px;color:#007bff;"></i>
                 </div>
             </div>
         </a>

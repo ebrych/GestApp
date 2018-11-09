@@ -1,7 +1,8 @@
 <p>&nbsp;</p>
 <div class="container">
     <h1>Gestión de Página Web</h1> 
-
+    <a href="<?php echo base_url() ?>Welcome/Panel" style="font-size:20px;color:#007bff;"><i class="fas fa-arrow-left"></i> Regresar </a> 
+    <p>&nbsp;</p>
     <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">

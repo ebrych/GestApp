@@ -4,17 +4,20 @@ class Asistencia extends CI_Controller{
 
     public $controlador='10';
     
-    public function index(){
+    public function index($fecha=null){
         $session=$this->session->userdata('logged');
         $cargo=$this->session->userdata('cargo');
         $permiso=$this->DataModel->veryfyPermission($cargo,$this->controlador);
         //sesion y permisos
         if($session==true && $permiso != 0){
-            $info['MyNombre']=$this->session->userdata('username');
-            $date=$this->input->post('date');
-            $data['personal']= $this->DataModel->listarAsistenciadelDia($date);
+            $fecha=$this->input->get('dateData');
+            if($fecha==null){
+                $fecha=date("Y-m-d");
+            }
+            $data['fecha']=$fecha; 
+            $data['personal']= $this->DataModel->listarAsistenciadelDia($fecha);
             $this->load->view('Layouts/header');
-            $this->load->view('Layouts/menu',$info);
+            $this->load->view('Layouts/menu');
             $this->load->view('Asistencia/index',$data);
             $this->load->view('Layouts/footer');	
         }else{
